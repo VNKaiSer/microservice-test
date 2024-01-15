@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
+import { Empty } from './empty';
 
 export const protobufPackage = 'auth';
 
@@ -36,8 +37,6 @@ export interface FindOneUserDto {
 export interface Users {
   users: User[];
 }
-
-export interface Empty {}
 
 export interface UpdateUserDto {
   name?: string | undefined;
