@@ -1,7 +1,8 @@
 import {
-  CreateUserDto,
+  Token,
   USERS_SERVICE_NAME,
   UpdateUserDto,
+  UserCreateDto,
   UsersServiceClient,
 } from '@app/common';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
@@ -16,23 +17,23 @@ export class UserService implements OnModuleInit {
     this.userService =
       this.client.getService<UsersServiceClient>(USERS_SERVICE_NAME);
   }
-  create(createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  create(createUserDto: UserCreateDto) {
+    return this.userService.register(createUserDto);
   }
 
   findAll() {
-    return this.userService.findAllUsers({});
+    return this.userService.getAllUsers({});
   }
 
   findOne(id: string) {
-    return this.userService.findOneUser({ id });
+    return this.userService.getUser({ id });
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userService.updateUser({ id, ...updateUserDto });
+  update(token: Token, updateUserDto: UpdateUserDto) {
+    return this.userService.updateUser({ ...updateUserDto, token });
   }
 
-  remove(id: string) {
-    return this.userService.removeUser({ id });
+  checkUserService() {
+    return 'UserService OK';
   }
 }

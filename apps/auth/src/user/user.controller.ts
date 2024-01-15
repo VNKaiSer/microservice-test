@@ -2,11 +2,15 @@ import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
 import {
   UsersServiceController,
-  CreateUserDto,
   UpdateUserDto,
   UsersServiceControllerMethods,
   FindOneUserDto,
-  PaginationDto,
+  Empty,
+  User,
+  UserCreateDto,
+  UserLoginDto,
+  Users,
+  Token,
 } from '@app/common';
 import { Observable } from 'rxjs';
 
@@ -14,28 +18,20 @@ import { Observable } from 'rxjs';
 @UsersServiceControllerMethods()
 export class UserController implements UsersServiceController {
   constructor(private readonly usersService: UserService) {}
-
-  createUser(createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  register(request: UserCreateDto): User | Promise<User> | Observable<User> {
+    return this.usersService.createUser(request);
+  }
+  login(request: UserLoginDto): User | Promise<User> | Observable<User> {
+    return this.usersService.login(request);
+  }
+  getUser(request: FindOneUserDto): User | Promise<User> | Observable<User> {
+    return this.usersService.getUser(request);
+  }
+  getAllUsers(request: Empty): Users | Promise<Users> | Observable<Users> {
+    return this.usersService.getAllUser();
   }
 
-  findAllUsers() {
-    return this.usersService.findAll();
-  }
-
-  findOneUser(findOneUserDto: FindOneUserDto) {
-    return this.usersService.findOne(findOneUserDto.id);
-  }
-
-  updateUser(updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto.id, updateUserDto);
-  }
-
-  removeUser(findOneUserDto: FindOneUserDto) {
-    return this.usersService.remove(findOneUserDto.id);
-  }
-
-  queryUsers(paginationDtoStream: Observable<PaginationDto>) {
-    return this.usersService.queryUsers(paginationDtoStream);
+  updateUser(request: UpdateUserDto): User | Promise<User> | Observable<User> {
+    return this.usersService.updateUser(request, request.token);
   }
 }

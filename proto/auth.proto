@@ -3,50 +3,61 @@ syntax = "proto3";
 package auth;
 
 service UsersService {
-  rpc CreateUser (CreateUserDto) returns (User) {}
-  rpc FindAllUsers (Empty) returns (Users) {}
-  rpc FindOneUser (FindOneUserDto) returns (User) {}
-  rpc UpdateUser (UpdateUserDto) returns (User) {}
-  rpc RemoveUser (FindOneUserDto) returns (User) {}
-  rpc QueryUsers (stream PaginationDto) returns (stream Users) {}
+    rpc Register(UserCreateDto) returns (User) {}
+    rpc Login(UserLoginDto) returns (User) {}
+    rpc GetUser(FindOneUserDto) returns (User) {}
+    rpc GetAllUsers(Empty) returns (Users) {}
+    rpc UpdateUser(UpdateUserDto) returns (User) {}
 }
 
-message PaginationDto {
-  int32 page = 1;
-  int32 skip = 2;
+message UserCreateDto {
+    string name = 1;
+    string password = 2;
+    string displayName = 3;
+    string status = 4;
+    string phone = 5;
+    string email = 6;
+    string avatar = 7;
+    bool isOwner = 8;
 }
 
-message UpdateUserDto {
-  string id = 1;
-  SocialMedia socialMedia = 2;
+message User{
+    string name = 1;
+    string displayName = 3;
+    string status = 4;
+    string phone = 5;
+    string email = 6;
+    string avatar = 7;
+}
+
+message UserLoginDto{
+    string email = 1;
+    string password = 2;
 }
 
 message FindOneUserDto {
-  string id = 1;
+    string id = 1;
 }
-
-message Empty {};
 
 message Users {
-  repeated User users = 1;
+    repeated User users = 1;
 }
 
-message CreateUserDto {
-  string username = 1;
-  string password = 2;
-  int32 age = 3;
+message Empty {}
+
+message UpdateUserDto{
+   optional string name = 1;
+   optional string passwordOld = 2;
+   optional string displayName = 3;
+   optional string status = 4;
+   optional string phone = 5;
+   optional string email = 6;
+   optional string avatar = 7;
+   optional bool isOwner = 8;
+   optional string password = 9;
+   Token token = 10;
 }
 
-message User {
-  string id = 1;
-  string username = 2;
-  string password = 3;
-  int32 age = 4;
-  bool subscribed = 5;
-  SocialMedia socialMedia = 6;
-}
-
-message SocialMedia {
-  optional string twitterUri = 1;
-  optional string fbUri = 2;
+message Token {
+    string authorization = 1;
 }
