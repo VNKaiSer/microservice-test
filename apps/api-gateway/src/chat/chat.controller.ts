@@ -1,12 +1,13 @@
 import { Body, Controller, Post, UsePipes, Get, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { ChatServiceClient, CustomValidationPipe } from '@app/common';
+import { CustomValidationPipe } from '@app/common';
+import { ChatService } from './chat.service';
 
 @ApiTags('chats')
 @Controller('chats')
 export class ChatController {
-  constructor(private readonly chatService: ChatServiceClient) {}
+  constructor(private readonly chatService: ChatService) {}
 
   @Post()
   // @ApiBody({ type:  })
@@ -25,7 +26,7 @@ export class ChatController {
 
   @Get()
   async getAllChats() {
-    return this.chatService.getAllChats({});
+    return this.chatService.getAllChats();
   }
 
   @Get(':chatId')

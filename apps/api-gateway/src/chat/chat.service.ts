@@ -26,7 +26,7 @@ export class ChatService implements OnModuleInit {
     return this.chatService.getChatById(chatId);
   }
 
-  async getAllChat(): Promise<Chat[] | any> {
+  async getAllChats(): Promise<Chat[] | any> {
     return this.chatService.getAllChats({});
   }
 }
