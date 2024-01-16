@@ -52,6 +52,28 @@
         "assets": ["proto/*.proto"],
         "watchAssets": true
       }
+    },
+    "channel": {
+      "type": "application",
+      "root": "apps/channel",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/channel/tsconfig.app.json",
+        "assets": ["proto/*.proto"],
+        "watchAssets": true
+      }
+    },
+    "thread": {
+      "type": "application",
+      "root": "apps/thread",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/thread/tsconfig.app.json",
+        "assets": ["proto/*.proto"],
+        "watchAssets": true
+      }
     }
   }
 }
