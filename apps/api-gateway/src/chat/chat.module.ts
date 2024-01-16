@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { ChatController } from './chat.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -13,7 +13,7 @@ import { CHAT_PACKAGE_NAME } from '@app/common';
         name: CHAT_SERVICE,
         transport: Transport.GRPC,
         options: {
-          protoPath: join(__dirname, '../auth.proto'),
+          protoPath: join(__dirname, '../chat.proto'),
           package: CHAT_PACKAGE_NAME,
         },
       },
@@ -21,6 +21,5 @@ import { CHAT_PACKAGE_NAME } from '@app/common';
   ],
   controllers: [ChatController],
   providers: [ChatService],
-  exports: [ChatService],
 })
 export class ChatModule {}
