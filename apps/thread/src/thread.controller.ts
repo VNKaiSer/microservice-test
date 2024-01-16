@@ -10,7 +10,7 @@ import {
 } from '@app/common';
 import { Observable } from 'rxjs';
 
-@Controller('thread')
+@Controller()
 @ThreadServiceControllerMethods()
 export class ThreadController implements ThreadServiceController {
   constructor(private readonly threadService: ThreadService) {}
